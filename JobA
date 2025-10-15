@@ -9,7 +9,8 @@ pipeline {
     }
     post {
         success {
-            build job: 'JobB'
+            // Trigger JobB, but do not fail this pipeline if JobB fails
+            build job: 'JobB', propagate: false
         }
     }
 }
