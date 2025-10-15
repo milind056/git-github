@@ -8,8 +8,16 @@ pipeline {
         }
     }
     post {
+        // Only trigger JobC if JobB succeeds
         success {
-            build job: 'JobC'
+            // Do not fail JobB if JobC fails
+            build job: 'JobC', propagate: false
         }
+        // Optional: always run JobC regardless of JobB result
+        /*
+        always {
+            build job: 'JobC', propagate: false
+        }
+        */
     }
 }
