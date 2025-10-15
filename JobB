@@ -1,15 +1,15 @@
 pipeline {
     agent any
     stages {
-        stage('Test') {
+        stage('test') {
             steps {
-                echo 'Running tests...'
+                echo 'Building the application...'
             }
         }
     }
     post {
-        always {
-            echo "Triggering JobC..."
+        success {
+            // Trigger JobC, but do not fail this pipeline if JobC fails
             build job: 'JobC', propagate: false
         }
     }
