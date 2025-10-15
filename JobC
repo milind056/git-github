@@ -8,10 +8,19 @@ pipeline {
         }
     }
 
- post {
-        always {
+
+post {
+
+    always {
             // Clears the workspace after the build
-            cleanWs()
+           cleanWs()
         }
+    success {
+        emailext (
+            subject: "Build Successful: ${env.JOB_NAME} ",
+            body: "Build completed successfully. See details at ${env.BUILD_URL}",
+            to: 'yankit056@gmail.com'
+        )
     }
 }
+
