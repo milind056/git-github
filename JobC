@@ -7,4 +7,11 @@ pipeline {
             }
         }
     }
+
+ post {
+        always {
+            // Clears the workspace after the build
+            cleanWs()
+        }
+    }
 }
