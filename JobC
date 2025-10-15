@@ -14,7 +14,7 @@ pipeline {
             emailext (
                 subject: "Build Successful: ${env.JOB_NAME}",
                 body: "Build completed successfully. See details at ${env.BUILD_URL}",
-                to: 'yankit056@gmail.com'
+                to: 'saurabhpandey689@gmail.com'
             )
         }
         always {
