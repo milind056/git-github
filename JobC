@@ -7,21 +7,10 @@ pipeline {
             }
         }
     }
-    post {
+
+ post {
         always {
-            // Send email notification
-            emailext(
-                to: 'yankit056@gmail.com',
-                subject: "Jenkins Job Completed",
-                body: """Jenkins Job Complted,
-
-The Jenkins job '${env.JOB_NAME}' has completed.
-Build URL: ${env.BUILD_URL}
-Status: ${currentBuild.currentResult}
-"""
-            )
-
-            // Clear workspace
+            // Clears the workspace after the build
             cleanWs()
         }
     }
