@@ -1,5 +1,6 @@
 pipeline {
     agent any
+
     stages {
         stage('Deploy') {
             steps {
@@ -8,19 +9,19 @@ pipeline {
         }
     }
 
-
-post {
-
-    always {
-            // Clears the workspace after the build
-           cleanWs()
+    post { 
+        success {
+            emailext (
+                subject: "Build Successful: ${env.JOB_NAME}",
+                body: "Build completed successfully. See details at ${env.BUILD_URL}",
+                to: 'yankit056@gmail.com'
+            )
         }
-    success {
-        emailext (
-            subject: "Build Successful: ${env.JOB_NAME} ",
-            body: "Build completed successfully. See details at ${env.BUILD_URL}",
-            to: 'yankit056@gmail.com'
-        )
+        always {
+            // Clears the workspace after the build
+            cleanWs()
+        }
     }
 }
+
 
